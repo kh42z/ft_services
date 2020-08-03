@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+  labels:
+    app: grafana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      initContainers:
+        - name: init-mysql
+          image: alpine:latest
+          command: ['sh', '-c', 'until nslookup mysql; do echo waiting for mysql; sleep 2; done;']
+      containers:
+      - name: grafana
+        image: ft_services/grafana
+        imagePullPolicy: Never
+        livenessProbe:
+            exec:
+              command:
+              - /liveness.sh
+            initialDelaySeconds: 30
+            periodSeconds: 10
+        ports:
+        - containerPort: 3000
+        env:
+          - name: FT_USER
+            valueFrom:
+              secretKeyRef:
+                name: ft-user
+                key: username
+          - name: FT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: ft-user
+                key: password

@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: ft_services/nginx
+        imagePullPolicy: Never
+        livenessProbe:
+            exec:
+              command:
+              - /liveness.sh
+            initialDelaySeconds: 30
+            periodSeconds: 10
+        ports:
+        - containerPort: 80
+        - containerPort: 443
+        - containerPort: 22
+        env:
+          - name: EIP
+            value: 172.17.0.100
+          - name: FT_USER
+            valueFrom:
+              secretKeyRef:
+                name: ft-user
+                key: username
+          - name: FT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: ft-user
+                key: password

@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: ft_services/mysql
+        livenessProbe:
+            exec:
+              command:
+              - /liveness.sh
+            initialDelaySeconds: 30
+            periodSeconds: 10
+        readinessProbe:
+          exec:
+            command: ["cat", "/tmp/ready"]
+          initialDelaySeconds: 5
+          periodSeconds: 2
+          timeoutSeconds: 1
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 3306
+        env:
+          - name: EIP
+            value: {EIP}
+          - name: FT_USER
+            valueFrom:
+              secretKeyRef:
+                name: ft-user
+                key: username
+          - name: FT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: ft-user
+                key: password
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql-claim
