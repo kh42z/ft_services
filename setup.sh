@@ -25,7 +25,7 @@ curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/miniku
 sudo mv minikube /usr/local/bin/
 minikube start --vm-driver=docker
 minikube addons enable metallb
-. ./srcs/build.sh
-. ./srcs/secrets.sh
-. ./srcs/deploy.sh
+/bin/bash ./srcs/build.sh
+/bin/bash ./srcs/secrets.sh
+/bin/bash ./srcs/deploy.sh
 minikube dashboard
