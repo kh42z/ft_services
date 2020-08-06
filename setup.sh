@@ -64,6 +64,7 @@ for CONTAINER in ${CONTAINERS[@]}; do
 done
 
 ## DEPLOY.SH
+MINIKUBE_IP=$(minikube ip)
 NETWORK=$(echo $MINIKUBE_IP|awk -F . '{print $1"."$2"."$3"."}')
 
 sed 's/{RANGE}/'${NETWORK}'100-'${NETWORK}'200/' ${DIR}/k8s/metallb.template > ${DIR}/k8s/metallb.yaml
