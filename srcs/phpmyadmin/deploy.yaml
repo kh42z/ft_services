@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phpmyadmin
+  labels:
+    app: phpmyadmin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phpmyadmin
+  template:
+    metadata:
+      labels:
+        app: phpmyadmin
+    spec:
+      containers:
+      - name: wordpress
+        image: ft_services/phpmyadmin
+        imagePullPolicy: Never
+        livenessProbe:
+            exec:
+              command:
+              - /liveness.sh
+            initialDelaySeconds: 30
+            periodSeconds: 10
+        ports:
+        - containerPort: 5000

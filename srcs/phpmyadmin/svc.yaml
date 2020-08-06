@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: phpmyadmin
+  labels:
+    app: phpmyadmin
+spec:
+  selector:
+    app: phpmyadmin
+  type: LoadBalancer
+  ports:
+  - port: 5000
+    targetPort: 5000
+    name: phpmyadmin
+    protocol: TCP
