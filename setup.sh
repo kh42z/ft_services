@@ -1,4 +1,10 @@
 #!/bin/bash
+SHELL=$(readlink /proc/$$/exe)
+if [ ${SHELL} != "/bin/bash" ]
+then
+	echo "please execute ./setup or /bin/bash ./setup.sh"
+	exit
+fi
 USER=$(whoami)
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/srcs"
 CONTAINERS=("mysql" "wordpress" "phpmyadmin" "nginx" "ftps" "influxdb" "grafana")
