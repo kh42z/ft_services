@@ -2,7 +2,7 @@
 SHELL=$(readlink /proc/$$/exe)
 if [ ${SHELL} != "/bin/bash" ]
 then
-	echo "please execute ./setup or /bin/bash ./setup.sh"
+	echo "please execute ./setup.sh or /bin/bash ./setup.sh"
 	exit
 fi
 USER=$(whoami)
