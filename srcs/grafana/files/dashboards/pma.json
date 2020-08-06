@@ -101,7 +101,7 @@
             {
               "key": "host",
               "operator": "=",
-              "value": "pma"
+              "value": "phpmyadmin"
             }
           ]
         }
@@ -232,7 +232,7 @@
             {
               "key": "host",
               "operator": "=",
-              "value": "pma"
+              "value": "phpmyadmin"
             }
           ]
         },
@@ -275,7 +275,7 @@
             {
               "key": "host",
               "operator": "=",
-              "value": "pma"
+              "value": "phpmyadmin"
             }
           ]
         }
@@ -405,7 +405,7 @@
             {
               "key": "host",
               "operator": "=",
-              "value": "pma"
+              "value": "phpmyadmin"
             }
           ]
         },
@@ -448,7 +448,7 @@
             {
               "key": "host",
               "operator": "=",
-              "value": "pma"
+              "value": "phpmyadmin"
             }
           ]
         },
@@ -491,7 +491,7 @@
             {
               "key": "host",
               "operator": "=",
-              "value": "pma"
+              "value": "phpmyadmin"
             }
           ]
         }
@@ -621,7 +621,7 @@
             {
               "key": "host",
               "operator": "=",
-              "value": "pma"
+              "value": "phpmyadmin"
             }
           ]
         }
@@ -657,7 +657,7 @@
     ]
   },
   "timezone": "",
-  "title": "pma",
-  "uid": "pma",
+  "title": "phpmyadmin",
+  "uid": "phpmyadmin",
   "version": 7
 }

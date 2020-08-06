@@ -2,9 +2,7 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 MINIKUBE_IP=$(minikube ip)
 NETWORK=$(echo $MINIKUBE_IP|awk -F . '{print $1"."$2"."$3"."}')
-CONTAINERS=("mysql" "wordpress" "pma" "nginx" "ftps" "influxdb" "grafana")
-
-
+CONTAINERS=("mysql" "wordpress" "phpmyadmin" "nginx" "ftps" "influxdb" "grafana")
 
 sed 's/{RANGE}/'${NETWORK}'100-'${NETWORK}'200/' ${DIR}/k8s/metallb.template > ${DIR}/k8s/metallb.yaml
 kubectl apply -f ${DIR}/k8s/metallb.yaml
